@@ -1,6 +1,17 @@
-'use strict';
+'use strict'
 
-const numberOfFilms = +prompt('How many films u seen', '');
+let numberOfFilms;
+
+function start() {
+    numberOfFilms = +prompt('How many films u seen', '');
+
+    while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
+        numberOfFilms = +prompt('How many films u seen', '');
+    }
+}
+
+start();
+
 const personalMovieDB = {
     count: numberOfFilms,
     movies: {},
@@ -11,62 +22,51 @@ const personalMovieDB = {
 
 
 //for (ok)
-for (let i = 0; i < 2; i++) {
-    const a = prompt('Name of the last movies u seen', ''),
-          b = prompt('Count the movies', '');
+function rememberMyFilms() {
+    for (let i = 0; i < 2; i++) {
+        const a = prompt('Name of the last movies u seen', ''),
+              b = prompt('Count the movies', '');
 
-    if (a != null && b != null && a != '' && b != '' && a.length < 50) {
-        personalMovieDB.movies[a] = b;
-        console.log('DONE');
-    } else {
-        console.log('error');
-        i--;
-    }
-}
-
-//while (ok)
-/* let i = 0;
-while (i < 2) {
-    i++;
-    const  a = prompt('Name of the last movies u seen', ''),
-           b = prompt('Count the movies', '');
         if (a != null && b != null && a != '' && b != '' && a.length < 50) {
-        personalMovieDB.movies[a] = b;
-        console.log('DONE');
+            personalMovieDB.movies[a] = b;
+            console.log('DONE');
+        } else {
+            console.log('error');
+            i--;
+        }
+    }
+}
+rememberMyFilms();
+
+
+function detectLevel() {
+    if (personalMovieDB.count < 10) {
+        console.log('seen too few movies');
+    } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+        console.log('u are casual');
+    } else if (personalMovieDB.count >= 30) {
+        console.log('funboy');
     } else {
         console.log('error');
-        i--;
     }
-}  */
-
-// do while (ok)
-/* let i = 0;
-do {
-    const a = prompt('Name of the last movies u seen', ''),
-        b = prompt('Count the movies', '');
-
-    if (a != null && b != null && a != '' && b != '' && a.length < 50) {
-        personalMovieDB.movies[a] = b;
-        console.log('DONE');
-    } else {
-        console.log('error');
-        i--;
-    }
-} while (i < 2); */
-
-
-
-
-
-if (personalMovieDB.count < 10) {
-    console.log('seen too few movies');
-} else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
-    console.log('u are casual');
-} else if (personalMovieDB.count >= 30) {
-    console.log('funboy');
-} else {
-    console.log('error');
 }
 
+//detectLevel();
+
+
+function showMyDB (hidden) {
+    if (!hidden) {
+        console.log(personalMovieDB);
+    }
+}
+showMyDB(personalMovieDB.privat);
+
+function writeYourGenres() {
+    for (let i = 1; i <= 3; i++) {
+        const genre = prompt(`Ur favorit genres ${i}`);
+        personalMovieDB.genres[i- 1] = genre;
+    }
+}
+writeYourGenres();
 
 console.log(personalMovieDB);
