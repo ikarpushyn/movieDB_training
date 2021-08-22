@@ -1,23 +1,17 @@
-'use strict'
-
-let numberOfFilms;
-
-function start() {
-    numberOfFilms = +prompt('How many films u seen', '');
-
-    while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
-        numberOfFilms = +prompt('How many films u seen', '');
-    }
-}
-
-start();
 
 const personalMovieDB = {
-    count: numberOfFilms,
+    count: 0,
     movies: {},
     actors: {},
     genres: [],
-    privat: false
+    privat: false,
+    start: function() {
+        personalMovieDB.count = +prompt('How many films u seen', '');
+    
+        while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
+            personalMovieDB.count = +prompt('How many films u seen', '');
+        }
+    }
 };
 
 
@@ -25,7 +19,7 @@ const personalMovieDB = {
 function rememberMyFilms() {
     for (let i = 0; i < 2; i++) {
         const a = prompt('Name of the last movies u seen', ''),
-              b = prompt('Count the movies', '');
+            b = prompt('Count the movies', '');
 
         if (a != null && b != null && a != '' && b != '' && a.length < 50) {
             personalMovieDB.movies[a] = b;
@@ -37,7 +31,6 @@ function rememberMyFilms() {
     }
 }
 rememberMyFilms();
-
 
 function detectLevel() {
     if (personalMovieDB.count < 10) {
@@ -52,19 +45,31 @@ function detectLevel() {
 }
 
 //detectLevel();
+// 
 
-
-function showMyDB (hidden) {
+function showMyDB(hidden) {
     if (!hidden) {
         console.log(personalMovieDB);
     }
 }
 showMyDB(personalMovieDB.privat);
 
+function toggleVisibleMyDB() {
+    if (personalMovieDB.privat == false) {
+        personalMovieDB.privat = true;
+    } else if (personalMovieDB.privat == true){
+        personalMovieDB.privat = false;
+    }
+}
+
 function writeYourGenres() {
     for (let i = 1; i <= 3; i++) {
         const genre = prompt(`Ur favorit genres ${i}`);
-        personalMovieDB.genres[i- 1] = genre;
+        if (genre != null && genre != '') {
+            personalMovieDB.genres[i - 1] = genre;
+        } else {
+            i--;
+        }
     }
 }
 writeYourGenres();
