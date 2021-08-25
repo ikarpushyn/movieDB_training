@@ -15,7 +15,6 @@ const personalMovieDB = {
         for (let i = 0; i < 2; i++) {
             const a = prompt('Name of the last movies u seen', ''),
                 b = prompt('Count the movies', '');
-
             if (a != null && b != null && a != '' && b != '' && a.length < 50) {
                 personalMovieDB.movies[a] = b;
                 console.log('DONE');
@@ -42,20 +41,25 @@ const personalMovieDB = {
         }
     },
     toggleVisibleMyDB: function () {
-        if (personalMovieDB.privat == false) {
-            personalMovieDB.privat = true;
-        } else if (personalMovieDB.privat == true) {
+        if (personalMovieDB.privat) {
             personalMovieDB.privat = false;
+        } else {
+            personalMovieDB.privat = true;
         }
     },
     writeYourGenres: function () {
         for (let i = 1; i <= 3; i++) {
-            const genre = prompt(`Ur favorit genres ${i}`);
-            if (genre != null && genre != '') {
-                personalMovieDB.genres[i - 1] = genre;
-            } else {
+            let genres = prompt(`Ur favorit genres ${i}`).toLowerCase();
+            if (genres == null && genres === '') {
+                console.log('u write wrong information');
                 i--;
+            } else {
+                personalMovieDB.genres[i - 1] = genres;
+                personalMovieDB.genres.sort();
             }
         }
-    }
+        personalMovieDB.genres.forEach((item, i) => {
+            console.log(`favorite genre #${i+1} - is ${item}`);
+        });
+    },
 };

@@ -2,7 +2,7 @@ const arr = [1, 32, 3, 14, 557, 9];
 arr.sort(compareNum);
 console.log(arr);
 
-function compareNum(a, b){
+function compareNum(a, b) {
     return a - b;
 }
 
@@ -33,3 +33,11 @@ function compareNum(a, b){
 // products.sort();
 
 // console.log(products.join('; ')); 
+
+// const styles = ['Джаз', 'Блюз'];
+
+// styles.push('rock&roll');
+// console.log(styles);
+
+// styles.pop('Блюз');
+// console.log(styles);
